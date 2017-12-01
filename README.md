@@ -7,7 +7,7 @@ using Python to implement all kinds of Algorithms
 
 可以扫码关注：
 
-![](../image/wechat.jpg)
+![](./image/wechat.jpg)
 
 本仓库的具体内容如下：
 
