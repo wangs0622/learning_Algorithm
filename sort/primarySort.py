@@ -107,28 +107,30 @@ if __name__ == '__main__':
     compare = [[],[],[],[]]  #记录 选择排序，插入排序，冒泡排序 和 希尔排序 的交换顺序
     exch = [[],[],[],[]]
     
-    data = []   # 数组
+    data = []   # 待排序的数组
     
-    name = ['selectionSort','insertionSort','bubbleSort','shellSort']
-    function = [selectionSort, insertionSort, bubbleSort, shellSort]
+    name = ['selectionSort','insertionSort','bubbleSort','shellSort'] # 标签名
+    function = [selectionSort, insertionSort, bubbleSort, shellSort]  # 函数名
     max_num = 1000000
-    min_num = 0
+    min_num = 0  #待排序数组的取值范围 [max_num, min_num]
     
-    number = 16
-    
+    number = 16  # 数组的长度： 2**number   这个参数根据情况修改
+
+    # 生成指定长度的待排序数组
     for n in range(6,number):
         for j in range(2**n):
             data.append(random.randint(min_num, max_num))
-        
+
+        # 复制一份数组
         temp = data[:-1]
-     
+        # 计算每种算法所需要的交换次数和对比次数
         for i in range(4):
             compare_num, exch_num = function[i](data)
             compare[i].append(compare_num)
             exch[i].append(exch_num)
             data = temp[:-1]
     
-    
+    # 画出折线图
     marks = ['o','.','+','*']  
     x = list(range(6,number))
     plt.figure(num = 1)
