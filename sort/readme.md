@@ -8,23 +8,23 @@
 
 **当 number = 16 时的结果图**
 
-<center> ![](../image/comapreTime_with_n_max_is_16.png) </center>
+![](../image/comapreTime_with_n_max_is_16.png) 
 
-<center>  比较次数随长度的变化 </center>
+比较次数随长度的变化
 
 
-<center> ![](../image/exchTime_with_n_max_is_16.png) </center>
+![](../image/exchTime_with_n_max_is_16.png)
 
-<center>  交换次数随长度的变化 </center>
+ 交换次数随长度的变化 
 
 
 **当 number = 10 时的结果图**
 
-<center> ![](../image/comapreTime_with_n_max_is_10.png) </center>
+![](../image/compareTime_with_n_max_is_10.png)
 
-<center>  比较次数随长度的变化 </center>
+比较次数随长度的变化
 
 
-<center> ![](../image/comapreTime_with_n_max_is_10.png) </center>
+![](../image/exchTime_with_n_max_is_10.png)
 
-<center>  交换次数随长度的变化 </center>
+交换次数随长度的变化 
