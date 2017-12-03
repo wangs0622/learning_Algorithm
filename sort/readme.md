@@ -4,27 +4,18 @@
 
 - `primarySort.py` 中介绍了四种初级排序算法的 python 实现，分别是: **选择排序**， **插入排序**， **冒泡排序** 以及 **希尔排序**
 
-程序的运行结果图：
+| 函数或者类 名 | 函数或者类作用 |
+|-------| --------|
+| selectionSort() | 选择排序 |
+| insertionSort() | 插入排序 |
+| bubbleSort() | 冒泡排序 |
+| shellSort() | 希尔排序 |
+| Date() | 定义日期类 |
 
-**当 number = 16 时的结果图**
+- `mergeSort.py` 介绍并归排序
 
-![](../image/compareTime_with_n_max_is_16.png) 
-
-<center>比较次数随长度的变化</center>
-
-
-![](../image/exchTime_with_n_max_is_16.png)
-
-<center>交换次数随长度的变化 </center>
-
-
-**当 number = 10 时的结果图**
-
-![](../image/compareTime_with_n_max_is_10.png)
-
-<center>比较次数随长度的变化</center>
-
-
-![](../image/exchTime_with_n_max_is_10.png)
-
-<center>交换次数随长度的变化 </center>
+| 函数名 | 函数作用 |
+|-------| --------|
+| merge() | 用于实现并归操作 |
+| mergeSort() | 并归排序 |
+| main_mergeSort_Vs_shellSort() | 对比并归排序与希尔排序|
