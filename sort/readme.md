@@ -12,10 +12,16 @@
 | shellSort() | 希尔排序 |
 | Date() | 定义日期类 |
 
-- `mergeSort.py` 介绍并归排序
+- `mergeSort.py` 介绍归并排序
 
 | 函数名 | 函数作用 |
 |-------| --------|
-| merge() | 用于实现并归操作 |
-| mergeSort() | 并归排序 |
-| main_mergeSort_Vs_shellSort() | 对比并归排序与希尔排序|
+| merge() | 用于实现归并操作 |
+| mergeSort() | 归并排序 |
+| main_mergeSort_Vs_shellSort() | 对比归并排序与希尔排序|
+| mergeSortBU() | 自底向上的归并排序 |
+| mergeSortWithPrimary() | 改进方法1 的归并排序 |
+| mergeSortWithPrimaryAndJudge() | 改进方法1+2 的归并排序 |
+
+
+
