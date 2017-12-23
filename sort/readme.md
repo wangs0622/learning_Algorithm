@@ -23,5 +23,17 @@
 | mergeSortWithPrimary() | 改进方法1 的归并排序 |
 | mergeSortWithPrimaryAndJudge() | 改进方法1+2 的归并排序 |
 
+- `maxPQ.py` 介绍优先队列以及堆操作，此文件的运行环境为 python 3.6.4
+
+| 函数名 | 函数作用 |
+|-------| --------|
+| class maxPQ() | 创建无序 deque 的优先队列 |
+| class MaxPQbasedHeap() | 创建基于堆操作的优先队列 |
+| swim() | 实现堆操作的上浮操作 |
+| sink() | 实现堆操作的下沉操作 |
+| printHeap() | 以可视化的方式显示堆中的数据 |
+
+
+
 
 
