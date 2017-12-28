@@ -20,7 +20,7 @@ size()                      返回背包元素个数
 其实就相当于一个不使用  pop 方法的堆栈 
 '''
 
-from Stack import Stack
+from .Stack import Stack
 
 class Bag(Stack):
     
@@ -34,5 +34,5 @@ if __name__ == '__main__':
     bag = Bag()
     bag.add(1)
     bag.add(2)
-    print bag
-    print bag.isEmpty()
+    print( bag)
+    print( bag.isEmpty())

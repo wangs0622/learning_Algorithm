@@ -6,7 +6,53 @@ Created on 2017年12月28日
 
 function: 有序符号表
 '''
-   
+
+from LinkedList.Link import Link
+from LinkedList import Node
+
+class ST(Link):
+    
+    def __init__(self):
+        self.comparetimes = 0
+        Link.__init__(self)
+    
+    def put(self, key, value):
+        data = Node([key, value])
+        node = self._find(key)
+        if node:
+            node.data[1] = value 
+        self.appendFirst(data)
+    
+    
+    def get(self, key):
+        node = self._find(key)
+        if node:
+            return node.data[1]
+        return None
+    
+    def delete(self, key):
+        pass
+    
+    def contains(self, key):
+        node = self._find(key)
+        if node:
+            return True
+        return False
+    
+    def _find(self, key):
+        '''
+        function: 寻找到 key 对应得结点，并返回此结点，没有找到返回 None
+        '''
+        temp = self.first
+        while True:
+            if temp is None:
+                break
+            self.comparetimes += 1
+            if temp.data[0] == key:
+                return temp
+            temp = temp.next
+        return None
+ 
 class OrderedST():
     
     def __init__(self):
@@ -145,3 +191,16 @@ if __name__ == '__main__':
     st.put('m','1d')
     print(3 == st.rank(st.select(3)))
     print('f' == st.select(st.rank('f')))
+
+    '''
+    st = ST()
+    st.put('b','b')
+    st.put('y','g')
+    st.put('s','d')
+    st.put('f','b')
+    st.put('m','1d')
+    print(st)
+    print(st.size())
+    print(st.get('y'))
+    print(st.comparetimes)
+    '''

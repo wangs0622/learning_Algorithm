@@ -8,7 +8,7 @@ Created on 2017年11月29日
 function: 使用链表的方式定义一个堆栈
 '''
 
-from LinkedList import Node
+from .Node import Node
 
 class StackEmptyError(Exception):
     '''
@@ -55,7 +55,7 @@ class Stack():
     def __repr__(self):
         s = ''
         for node in self:
-            print 'node:     ', node
+            print( 'node:     ', node)
             s = s + str(node.data) + ' -> '
         return s[:-4]
     
@@ -69,54 +69,54 @@ def testPop(stack):
     
 if __name__ == '__main__':
     stack = Stack()
-    print 'stack: ', stack
+    print( 'stack: ', stack)
     stack.push(1)
-    print 'stack: ', stack
+    print( 'stack: ', stack)
     stack.push(2)
-    print 'stack: ', stack
+    print( 'stack: ', stack)
     stack.push(3)
-    print 'stack: ', stack
+    print( 'stack: ', stack)
     stack.push(4)
-    print 'stack: ', stack
+    print( 'stack: ', stack)
     stack.push(5)
-    print 'stack: ', stack
+    print( 'stack: ', stack)
     stack.push(6)
-    print 'stack: ', stack
+    print( 'stack: ', stack)
     stack.push(7)
-    print 'stack: ', stack
+    print( 'stack: ', stack)
     stack.push(8)
-    print 'stack: ', stack
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)
     
-    print "pop: ", testPop(stack)
-    print stack
+    print( "pop: ", testPop(stack))
+    print( 'stack: ', stack)

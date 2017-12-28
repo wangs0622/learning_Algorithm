@@ -1,11 +1,7 @@
-# _*_ encoding: utf-8 _*_
+from .Node import Node
+from .Stack import Stack
+from .Queue import Queue
+from .Link import Link
+from .Bag import Bag
 
-
-class Node():
-     
-    def __init__(self, data = None, next = None):
-        self.data = data
-        self.next = next
-        
-    def __repr__(self):
-        return 'data: ' + str(self.data)
+__about__ = ['Node', 'Stack', 'Queue', 'Link', 'Bag']

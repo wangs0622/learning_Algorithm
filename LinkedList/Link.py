@@ -8,7 +8,7 @@ version: python2.7
 '''
 
 
-from LinkedList import Node
+from .Node import Node
     
 # 定义链表类，link
 
@@ -42,7 +42,7 @@ class Link():
         deal the first node of the link
         '''
         if self.isEmpty():
-            print "This link is empty"
+            print( "This link is empty")
         else:
             self.first = self.first.next
             self.length -= 1
@@ -56,7 +56,7 @@ class Link():
     def __iter__(self):
         temp = self.first
         while True:
-            if temp.next == None:
+            if temp == None:
                 break
             else:
                 yield temp 
@@ -84,49 +84,49 @@ if __name__ == '__main__':
     link.appendFirst(Node(data = 'fifth'))
     link.appendFirst(Node(data = 'sixth'))
     
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
     
     
     link.dealFirst()
 
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
 
     
     link.dealFirst()
 
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
     
     link.dealFirst()
 
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
     
     link.dealFirst()
 
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
     
     link.dealFirst()
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
     
     link.dealFirst()
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
 
     link.dealFirst()
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
     
     link.dealFirst()
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
     
     link.dealFirst()
-    print "link: ", link
-    print "link length: ", link.length
+    print( "link: ", link)
+    print( "link length: ", link.length)
     
     

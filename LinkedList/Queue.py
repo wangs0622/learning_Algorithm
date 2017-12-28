@@ -14,7 +14,7 @@ Created on 2017/11/29
 ——————————————————————————————————————————————————
 '''
 
-from LinkedList import Node
+from .Node import Node
 class Queue():
     
     def __init__(self):
@@ -74,46 +74,46 @@ def testDequeue(queue):
     
 if __name__ == '__main__':
     queue = Queue()
-    print "queue: ", queue
+    print( "queue: ", queue)
     
     queue.enqueue(1)
-    print "queue: ", queue
+    print( "queue: ", queue)
     
     queue.enqueue(2)
-    print "queue: ", queue
+    print( "queue: ", queue)
     
     queue.enqueue(3)
-    print "queue: ", queue
+    print( "queue: ", queue)
     
     queue.enqueue(4)
-    print "queue: ", queue
+    print( "queue: ", queue)
     
     queue.enqueue(5)
-    print "queue: ", queue
+    print( "queue: ", queue)
     
     queue.enqueue(6)
-    print "queue: ", queue
+    print( "queue: ", queue)
     
-    print testDequeue(queue)
-    print "queue", queue
+    print( testDequeue(queue))
+    print( "queue: ", queue)
     
-    print testDequeue(queue)
-    print "queue", queue
+    print( testDequeue(queue))
+    print( "queue: ", queue)
     
-    print testDequeue(queue)
-    print "queue", queue
+    print( testDequeue(queue))
+    print( "queue: ", queue)
     
-    print testDequeue(queue)
-    print "queue", queue
+    print( testDequeue(queue))
+    print( "queue: ", queue)
     
-    print testDequeue(queue)
-    print "queue", queue
+    print( testDequeue(queue))
+    print( "queue: ", queue)
     
-    print testDequeue(queue)
-    print "queue", queue
+    print( testDequeue(queue))
+    print( "queue: ", queue)
     
-    print testDequeue(queue)
-    print "queue", queue
+    print( testDequeue(queue))
+    print( "queue: ", queue)
     
-    print testDequeue(queue)
-    print "queue", queue
+    print( testDequeue(queue))
+    print( "queue: ", queue)
