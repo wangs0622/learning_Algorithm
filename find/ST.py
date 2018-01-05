@@ -6,7 +6,6 @@ Created on 2017年12月28日
 
 function: 有序符号表
 '''
-
 from LinkedList.Link import Link
 from LinkedList import Node
 
@@ -51,13 +50,15 @@ class ST(Link):
             if temp.data[0] == key:
                 return temp
             temp = temp.next
-        return None
- 
+        return None   
+
+
 class OrderedST():
     
     def __init__(self):
         self.keys = [] 
         self.values = []
+        self.comparetimes = 0
     
     def put(self, key, value):
         '''
@@ -183,24 +184,13 @@ class OrderedST():
 
 
 if __name__ == '__main__':
-    st = OrderedST()
-    st.put('b','b')
-    st.put('y','g')
-    st.put('s','d')
-    st.put('f','b')
-    st.put('m','1d')
-    print(3 == st.rank(st.select(3)))
-    print('f' == st.select(st.rank('f')))
-
-    '''
     st = ST()
     st.put('b','b')
     st.put('y','g')
     st.put('s','d')
     st.put('f','b')
     st.put('m','1d')
-    print(st)
-    print(st.size())
-    print(st.get('y'))
-    print(st.comparetimes)
-    '''
+    print(st.get('hu'))
+    
+    
+    
