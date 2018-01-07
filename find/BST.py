@@ -92,34 +92,34 @@ class BST():
         else:
             self._putWithOutRecursion(self.root, key, value)
         
-    def _put(self, node, key, value):
-        if node == None:
+    def _put(self, sub_tree, key, value):
+        if sub_tree == None:
             return Node(key, value)
         
-        if key == node.key:
-            node.value = value
-        elif key > node.key:
-            node.rchild = self._put(node.rchild, key, value)
+        if key == sub_tree.key:
+            sub_tree.value = value
+        elif key > sub_tree.key:
+            sub_tree.rchild = self._put(sub_tree.rchild, key, value)
         else: 
-            node.lchild = self._put(node.lchild, key, value)
+            sub_tree.lchild = self._put(sub_tree.lchild, key, value)
         
-        left_num = node.lchild.N if node.lchild is not None else 0
-        right_num = node.rchild.N if node.rchild is not None else 0
-        node.N = left_num + right_num + 1
-        return node
+        left_num = sub_tree.lchild.N if sub_tree.lchild is not None else 0
+        right_num = sub_tree.rchild.N if sub_tree.rchild is not None else 0
+        sub_tree.N = left_num + right_num + 1
+        return sub_tree
     
-    def _putWithOutRecursion(self, node, key, value):
+    def _putWithOutRecursion(self, sub_tree, key, value):
         left_or_right = 0
-        while node is not None:
-            parents = node
-            if node.key == key:
-                node.value = value
+        while sub_tree is not None:
+            parents = sub_tree
+            if sub_tree.key == key:
+                sub_tree.value = value
                 return
-            elif node.key > key:
-                node = node.lchild
+            elif sub_tree.key > key:
+                sub_tree = sub_tree.lchild
                 left_or_right = -1
             else:
-                node = node.rchild
+                sub_tree = sub_tree.rchild
                 left_or_right = 1
         if left_or_right == 1:
             parents.rchild = Node(key, value)
@@ -129,10 +129,10 @@ class BST():
         
         
     def _plusN(self, key):
-        node = self.root
-        while node.key is not key:
-            node.N += 1
-            node = node.lchild if node.key > key else node.rchild        
+        sub_tree = self.root
+        while sub_tree.key is not key:
+            sub_tree.N += 1
+            sub_tree = sub_tree.lchild if sub_tree.key > key else sub_tree.rchild        
     
     def get(self, key, recursion=True):
         
@@ -142,36 +142,36 @@ class BST():
         else:
             return self._getWithOutRecursion(self.root, key)
     
-    def _get(self, node, key):
+    def _get(self, sub_tree, key):
         
-        if node is None: return
+        if sub_tree is None: return
         
-        if node.key == key:
-            return node.value
-        elif node.key > key:
-            return self._get(node.lchild, key)
+        if sub_tree.key == key:
+            return sub_tree.value
+        elif sub_tree.key > key:
+            return self._get(sub_tree.lchild, key)
         else:
-            return self._get(node.rchild, key)
+            return self._get(sub_tree.rchild, key)
 
-    def _getWithOutRecursion(self, node, key):
+    def _getWithOutRecursion(self, sub_tree, key):
 
-        while node is not None:
-            if node.key == key:
-                return node.value
-            elif node.key > key:
-                node = node.lchild
+        while sub_tree is not None:
+            if sub_tree.key == key:
+                return sub_tree.value
+            elif sub_tree.key > key:
+                sub_tree = sub_tree.lchild
             else:
-                node = node.rchild
+                sub_tree = sub_tree.rchild
         return None
 
     def size(self):
         return self._size(self.root)
     
-    def _size(self, node):
-        if node is None:
+    def _size(self, sub_tree):
+        if sub_tree is None:
             return 0
         else:
-            return node.N
+            return sub_tree.N
         
         
         
