@@ -1,6 +1,6 @@
 # _*_ encoding: utf-8 _*_
 '''
-Created on 2018年1月3日
+Created on 2018/1/3
 
 @author: wangs0622
 '''
@@ -53,7 +53,26 @@ class BST():
         constructing a BST only with root node initially. 
         '''
         self.root = root
-      
+    
+    def __len__(self):
+        return self.root.N
+    
+    def __contains__(self, key):
+        return self._bstSearch(self.root, key) is not None
+    
+    def _bstSearch(self, sub_tree, key):
+        if sub_tree is None:
+            return None
+        elif sub_tree.key > key:
+            return self._bstSearch(sub_tree.lchild, key)
+            
+        elif sub_tree.key < key:
+            return self._bstSearch(sub_tree.rchild, key)
+            
+        else:
+            return sub_tree
+            
+        
     def put(self, key, value, recursion=True):
         '''
         put the "key:value" into the BST. 
@@ -113,19 +132,15 @@ class BST():
         node = self.root
         while node.key is not key:
             node.N += 1
-            node = node.lchild if node.key > key else node.rchild
-            
-        
-        
-        
-        
-            
-        
+            node = node.lchild if node.key > key else node.rchild        
     
-    def get(self, key):
+    def get(self, key, recursion=True):
         
-        if self.root == None: return 
-        return self._get(self.root, key)
+        if self.root == None: return
+        if recursion:
+            return self._get(self.root, key)
+        else:
+            return self._getWithOutRecursion(self.root, key)
     
     def _get(self, node, key):
         
@@ -137,7 +152,18 @@ class BST():
             return self._get(node.lchild, key)
         else:
             return self._get(node.rchild, key)
-    
+
+    def _getWithOutRecursion(self, node, key):
+
+        while node is not None:
+            if node.key == key:
+                return node.value
+            elif node.key > key:
+                node = node.lchild
+            else:
+                node = node.rchild
+        return None
+
     def size(self):
         return self._size(self.root)
     
@@ -154,14 +180,29 @@ if __name__ == '__main__':
     bst = BST()
     bst.put('g',1)
     bst.put('d',3)
-    bst.put('Z',2)
-    print(bst.root)
-    
+    bst.put('z',2)
+    bst.put('e',4)
+    bst.put('y',4)
+    bst.put('j',9)
+    #print(bst.root)
+    print(bst.get('y'))
+    print(bst.get('r'))
+    print('y' in bst)
+    print(bst._bstSearch(bst.root, 'y').key)
+    print(len(bst))
+
+    '''
     print('----------------------------------')
     bst1 = BST()
-    bst.put('g',1,False)
-    bst.put('d',3,False)
-    bst.put('Z',2,False)
-    print(bst.root)
+    bst1.put('g',1,False)
+    bst1.put('d',3,False)
+    bst1.put('z',2,False)
+    bst1.put('e',4,False)
+    bst1.put('y',4,False)
+    bst1.put('j',9,False)
+    print(bst.get('y',False))
+    print(bst.get('r',False))
+    #print(bst1.root)
+    '''
     
         
