@@ -181,6 +181,7 @@ if __name__ == '__main__':
     bst.put('g',1)
     bst.put('d',3)
     bst.put('z',2)
+<<<<<<< Updated upstream
     bst.put('e',4)
     bst.put('y',4)
     bst.put('j',9)
@@ -192,11 +193,16 @@ if __name__ == '__main__':
     print(len(bst))
 
     '''
+=======
+    print(bst.root)
+    
+>>>>>>> Stashed changes
     print('----------------------------------')
     bst1 = BST()
     bst1.put('g',1,False)
     bst1.put('d',3,False)
     bst1.put('z',2,False)
+<<<<<<< Updated upstream
     bst1.put('e',4,False)
     bst1.put('y',4,False)
     bst1.put('j',9,False)
@@ -204,5 +210,8 @@ if __name__ == '__main__':
     print(bst.get('r',False))
     #print(bst1.root)
     '''
+=======
+    print(bst1.root)
+>>>>>>> Stashed changes
     
         
