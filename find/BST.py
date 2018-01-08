@@ -164,14 +164,84 @@ class BST():
                 sub_tree = sub_tree.rchild
         return None
 
-    def size(self):
-        return self._size(self.root)
+    def size(self, sub_tree=-1):
+        if sub_tree == -1: return self.root.N
+        elif sub_tree is None: return 0
+        else: return sub_tree.N
+        
+    def min(self):
+        if self.root is None: return None
+        return self._min(self.root).key
     
-    def _size(self, sub_tree):
-        if sub_tree is None:
-            return 0
+    def _min(self, sub_tree):
+        if sub_tree.lchild is None: return sub_tree
+        return self._min(sub_tree.lchild)
+    
+    def max(self):
+        if self.root is None: return None
+        return self._max(self.root).key
+    
+    def _max(self, sub_tree):
+        if sub_tree.rchild is None: return sub_tree
+        return self._max(sub_tree.rchild)
+    
+    def floor(self, key):
+        if self.root is None: return None
+        result = self._floor(self.root, key)
+        return None if result is None else result.key
+    
+    def _floor(self, sub_tree, key):
+        if sub_tree is None: return None
+        if sub_tree.key == key: return sub_tree
+        elif sub_tree.key > key:
+            return self._floor(sub_tree.lchild, key)
         else:
-            return sub_tree.N
+            temp  = self._floor(sub_tree.rchild, key)
+            return sub_tree if temp is None else temp 
+    
+    def ceiling(self, key):
+        if self.root is None: return None
+        result = self._ceiling(self.root, key)
+        return None if result is None else result.key
+    
+    def _ceiling(self, sub_tree, key):
+        if sub_tree is None: return None
+        if sub_tree.key == key: return sub_tree
+        elif sub_tree.key < key:
+            return self._ceiling(sub_tree.rchild, key)
+        else:
+            temp = self._ceiling(sub_tree.lchild, key)
+            return sub_tree if temp is None else temp
+        
+    def select(self, k):
+        if self.root is None: return None
+        if k < 0 or k > self.size()-1:
+            raise ValueError('{0} is out of range:(0, {1})'.format(k, self.size()-1))
+        return self._select(self.root, k).key
+    
+    def _select(self, sub_tree, k):
+        t = 0 if sub_tree.lchild is None else sub_tree.lchild.N
+        if t > k:
+            return self._select(sub_tree.lchild, k)
+        elif t < k:
+            return self._select(sub_tree.rchild, k-t-1)
+        else:
+            return sub_tree
+        
+    def rank(self, key):
+        if self.root is None: return None
+        return self._rank(self.root, key)
+    
+    def _rank(self, sub_tree, key):
+        if sub_tree is None: return 0
+        if sub_tree.key == key:
+            return self.size(sub_tree.lchild)
+        elif sub_tree.key > key:
+            return self._rank(sub_tree.lchild, key)
+        else:
+            return 1 + self.size(sub_tree.lchild) + self._rank(sub_tree.rchild, key)
+            
+        
         
         
         
@@ -181,28 +251,21 @@ if __name__ == '__main__':
     bst.put('g',1)
     bst.put('d',3)
     bst.put('z',2)
-<<<<<<< Updated upstream
     bst.put('e',4)
     bst.put('y',4)
     bst.put('j',9)
+    bst.put('a',45)
     #print(bst.root)
-    print(bst.get('y'))
-    print(bst.get('r'))
-    print('y' in bst)
-    print(bst._bstSearch(bst.root, 'y').key)
-    print(len(bst))
-
-    '''
-=======
-    print(bst.root)
     
->>>>>>> Stashed changes
+    
+    print(bst.select(4))
+    print(bst.rank('b'))
+    '''
     print('----------------------------------')
     bst1 = BST()
     bst1.put('g',1,False)
     bst1.put('d',3,False)
     bst1.put('z',2,False)
-<<<<<<< Updated upstream
     bst1.put('e',4,False)
     bst1.put('y',4,False)
     bst1.put('j',9,False)
@@ -210,8 +273,6 @@ if __name__ == '__main__':
     print(bst.get('r',False))
     #print(bst1.root)
     '''
-=======
-    print(bst1.root)
->>>>>>> Stashed changes
+
     
         
