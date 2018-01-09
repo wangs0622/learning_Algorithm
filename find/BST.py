@@ -240,6 +240,38 @@ class BST():
             return self._rank(sub_tree.lchild, key)
         else:
             return 1 + self.size(sub_tree.lchild) + self._rank(sub_tree.rchild, key)
+        
+    def deleteMin(self):
+        if self.root is None:
+            return
+        self._deleteMin(self.root)
+    
+    def _deleteMin(self, sub_tree):
+        if sub_tree.lchild is None:
+            return sub_tree.rchild
+        
+        sub_tree.lchild = self._deleteMin(sub_tree.lchild)
+        sub_tree.N = self.size(sub_tree.lchild) + self.size(sub_tree.rchild) + 1
+        return sub_tree
+    
+    def deleteMax(self):
+        if self.root is None: return 
+        self._deleteMax(self.root)
+        
+    def _deleteMax(self, sub_tree):
+        if sub_tree.rchild is None:
+            return sub_tree.lchild
+        sub_tree.rchild = self._deleteMax(sub_tree.rchild)
+        sub_tree.N = self.size(sub_tree.lchild) + self.size(sub_tree.rchild) + 1
+        return sub_tree
+    
+    def delete(self, key):
+        if key not in self:
+            raise KeyError("{} is not in this BST object".format(key))
+        
+    
+        
+        
             
         
         
@@ -258,8 +290,10 @@ if __name__ == '__main__':
     #print(bst.root)
     
     
-    print(bst.select(4))
-    print(bst.rank('b'))
+    print(bst.root)
+    bst.deleteMax()
+    print('-----------------------')
+    print(bst.root)
     '''
     print('----------------------------------')
     bst1 = BST()
