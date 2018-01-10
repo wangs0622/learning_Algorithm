@@ -1,4 +1,6 @@
-此文件夹中存放关于查找的代码，具体的代码内容的解释清查看 [http://www.wangs0622.com](http://www.wangs0622.com)
+此文件夹中存放关于查找的代码，具体的代码内容的解释清查看 
+
+[http://www.wangs0622.com/2018/01/10/using-python-to-study-algotithm-symbol-table/](http://www.wangs0622.com/2018/01/10/using-python-to-study-algotithm-symbol-table/)
 
 # **`ST.py`** 有序符号表
 
@@ -36,6 +38,8 @@
 | size(self, lokey, hikey) | 位于[lokey, hikey] 之间键的个数|
 | keys(self, lokey, hikey) | 位于[lokey, hikey] 之间的键，按顺序排布|
 
+
+------
 
 # **`BST.py`**  使用二叉树实现有序符号表
 
