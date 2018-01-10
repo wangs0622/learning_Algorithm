@@ -5,8 +5,6 @@ Created on 2018/1/3
 @author: wangs0622
 '''
 
-from copy import deepcopy
-
 class Node():
     '''
     This Node class defines a node object, which contains two child-node,one is 
@@ -167,7 +165,11 @@ class BST():
         return None
 
     def size(self, sub_tree=-1):
-        if sub_tree == -1: return self.root.N
+        if sub_tree == -1: 
+            if self.root is None:
+                return 0
+            else:
+                return self.root.N
         elif sub_tree is None: return 0
         else: return sub_tree.N
         
@@ -218,7 +220,7 @@ class BST():
     def select(self, k):
         if self.root is None: return None
         if k < 0 or k > self.size()-1:
-            raise ValueError('{0} is out of range:(0, {1})'.format(k, self.size()-1))
+            raise ValueError('{0} is out of range:(0, {1})'.format(k, self.size()))
         return self._select(self.root, k).key
     
     def _select(self, sub_tree, k):
@@ -270,10 +272,11 @@ class BST():
     def delete(self, key):
         if key not in self:
             raise KeyError("{} is not in this BST object".format(key))
+        
         self._delete(self.root, key)
 
     def _delete(self, sub_tree, key):
-        if sub_tree is None: return None
+        if sub_tree is None: return
         if key < sub_tree.key: sub_tree.lchild = self._delete(sub_tree.lchild, key)
         elif key > sub_tree.key: sub_tree.rchild = self._delete(sub_tree.rchild, key)
         else:
@@ -287,6 +290,32 @@ class BST():
             sub_tree.lchild = t.lchild
         sub_tree.N = self.size(sub_tree.lchild) + self.size(sub_tree.rchild) + 1
         return sub_tree
+    
+    def getkeys(self, lokey=None, hikey=None):
+        lokey = lokey if lokey is not None else 0
+        hikey = hikey if hikey is not None else self.size()-1
+        if lokey < 0: raise KeyError('lokey: {} must bigger than 0'.format(lokey))
+        if hikey > self.size(): raise KeyError('hikey:{0} must smaller than {1}'.format(hikey, self.size()))
+        if lokey >= hikey: raise KeyError('lokey:{0} must smaller than hikey:{1}'.fromat(lokey, hikey))
+        if self.size() == 0: return
+        lokey = self.select(lokey)
+        hikey = self.select(hikey)
+        result = []
+        self._getkeys(self.root, result, lokey, hikey)
+        return result
+    
+    def _getkeys(self, sub_tree, result, lokey, hikey):
+        if sub_tree is None: return
+        if lokey < sub_tree.key:
+            self._getkeys(sub_tree.lchild, result, lokey, hikey)
+            
+        if  lokey <= sub_tree.key <= hikey:
+            result.append(sub_tree.key)
+        
+        if hikey > sub_tree.key:
+            self._getkeys(sub_tree.rchild, result, lokey, hikey)
+            
+        
 
 if __name__ == '__main__':
     bst = BST()
@@ -296,35 +325,6 @@ if __name__ == '__main__':
     bst.put('e',4)
     bst.put('y',4)
     bst.put('j',9)
-    bst.put('a',45)
-    #print(bst.root)
-    
-    
+    bst.put('a',45)    
     print(bst.root)
-    #print(bst._min(bst.root.lchild.rchild))
-
-
-    
-    
-    bst.delete('d')
-    print('=====================================')
-    print(bst.root)
-    '''
-    print('-----------------------')
-    print(bst.root)
-
-
-
-    
-    print('----------------------------------')
-    bst1 = BST()
-    bst1.put('g',1,False)
-    bst1.put('d',3,False)
-    bst1.put('z',2,False)
-    bst1.put('e',4,False)
-    bst1.put('y',4,False)
-    bst1.put('j',9,False)
-    print(bst.get('y',False))
-    print(bst.get('r',False))
-    #print(bst1.root)
-    '''
+    print(bst.delete('k'))
