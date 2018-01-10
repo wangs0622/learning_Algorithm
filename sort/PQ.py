@@ -1,7 +1,7 @@
 # _*_ encoding: utf-8 _*_
 
 import queue
-from maxPQ import printHeap
+from sort.maxPQ import printHeap
 
 minPQ = queue.PriorityQueue
 
