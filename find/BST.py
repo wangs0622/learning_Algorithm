@@ -5,6 +5,8 @@ Created on 2018/1/3
 @author: wangs0622
 '''
 
+from copy import deepcopy
+
 class Node():
     '''
     This Node class defines a node object, which contains two child-node,one is 
@@ -138,7 +140,7 @@ class BST():
         
         if self.root == None: return
         if recursion:
-            return self._get(self.root, key)
+            return self._get(self.root, key).value
         else:
             return self._getWithOutRecursion(self.root, key)
     
@@ -147,7 +149,7 @@ class BST():
         if sub_tree is None: return
         
         if sub_tree.key == key:
-            return sub_tree.value
+            return sub_tree
         elif sub_tree.key > key:
             return self._get(sub_tree.lchild, key)
         else:
@@ -157,7 +159,7 @@ class BST():
 
         while sub_tree is not None:
             if sub_tree.key == key:
-                return sub_tree.value
+                return sub_tree
             elif sub_tree.key > key:
                 sub_tree = sub_tree.lchild
             else:
@@ -268,16 +270,24 @@ class BST():
     def delete(self, key):
         if key not in self:
             raise KeyError("{} is not in this BST object".format(key))
-        
-    
-        
-        
-            
-        
-        
-        
-        
-        
+        self._delete(self.root, key)
+
+    def _delete(self, sub_tree, key):
+        if sub_tree is None: return None
+        if key < sub_tree.key: sub_tree.lchild = self._delete(sub_tree.lchild, key)
+        elif key > sub_tree.key: sub_tree.rchild = self._delete(sub_tree.rchild, key)
+        else:
+            if sub_tree.rchild is None:
+                return sub_tree.lchild
+            if sub_tree.lchild is None:
+                return sub_tree.rchild
+            t = sub_tree
+            sub_tree = self._min(t.rchild)
+            sub_tree.rchild = self._deleteMin(t.rchild)
+            sub_tree.lchild = t.lchild
+        sub_tree.N = self.size(sub_tree.lchild) + self.size(sub_tree.rchild) + 1
+        return sub_tree
+
 if __name__ == '__main__':
     bst = BST()
     bst.put('g',1)
@@ -291,10 +301,21 @@ if __name__ == '__main__':
     
     
     print(bst.root)
-    bst.deleteMax()
-    print('-----------------------')
+    #print(bst._min(bst.root.lchild.rchild))
+
+
+    
+    
+    bst.delete('d')
+    print('=====================================')
     print(bst.root)
     '''
+    print('-----------------------')
+    print(bst.root)
+
+
+
+    
     print('----------------------------------')
     bst1 = BST()
     bst1.put('g',1,False)
@@ -307,6 +328,3 @@ if __name__ == '__main__':
     print(bst.get('r',False))
     #print(bst1.root)
     '''
-
-    
-        
