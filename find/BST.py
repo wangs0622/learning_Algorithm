@@ -138,7 +138,7 @@ class BST():
         
         if self.root == None: return
         if recursion:
-            return self._get(self.root, key)
+            return self._get(self.root, key).value
         else:
             return self._getWithOutRecursion(self.root, key)
     
@@ -147,7 +147,7 @@ class BST():
         if sub_tree is None: return
         
         if sub_tree.key == key:
-            return sub_tree.value
+            return sub_tree
         elif sub_tree.key > key:
             return self._get(sub_tree.lchild, key)
         else:
@@ -157,25 +157,166 @@ class BST():
 
         while sub_tree is not None:
             if sub_tree.key == key:
-                return sub_tree.value
+                return sub_tree
             elif sub_tree.key > key:
                 sub_tree = sub_tree.lchild
             else:
                 sub_tree = sub_tree.rchild
         return None
 
-    def size(self):
-        return self._size(self.root)
+    def size(self, sub_tree=-1):
+        if sub_tree == -1: 
+            if self.root is None:
+                return 0
+            else:
+                return self.root.N
+        elif sub_tree is None: return 0
+        else: return sub_tree.N
+        
+    def min(self):
+        if self.root is None: return None
+        return self._min(self.root).key
     
-    def _size(self, sub_tree):
-        if sub_tree is None:
-            return 0
+    def _min(self, sub_tree):
+        if sub_tree.lchild is None: return sub_tree
+        return self._min(sub_tree.lchild)
+    
+    def max(self):
+        if self.root is None: return None
+        return self._max(self.root).key
+    
+    def _max(self, sub_tree):
+        if sub_tree.rchild is None: return sub_tree
+        return self._max(sub_tree.rchild)
+    
+    def floor(self, key):
+        if self.root is None: return None
+        result = self._floor(self.root, key)
+        return None if result is None else result.key
+    
+    def _floor(self, sub_tree, key):
+        if sub_tree is None: return None
+        if sub_tree.key == key: return sub_tree
+        elif sub_tree.key > key:
+            return self._floor(sub_tree.lchild, key)
         else:
-            return sub_tree.N
+            temp  = self._floor(sub_tree.rchild, key)
+            return sub_tree if temp is None else temp 
+    
+    def ceiling(self, key):
+        if self.root is None: return None
+        result = self._ceiling(self.root, key)
+        return None if result is None else result.key
+    
+    def _ceiling(self, sub_tree, key):
+        if sub_tree is None: return None
+        if sub_tree.key == key: return sub_tree
+        elif sub_tree.key < key:
+            return self._ceiling(sub_tree.rchild, key)
+        else:
+            temp = self._ceiling(sub_tree.lchild, key)
+            return sub_tree if temp is None else temp
         
+    def select(self, k):
+        if self.root is None: return None
+        if k < 0 or k > self.size()-1:
+            raise ValueError('{0} is out of range:(0, {1})'.format(k, self.size()))
+        return self._select(self.root, k).key
+    
+    def _select(self, sub_tree, k):
+        t = 0 if sub_tree.lchild is None else sub_tree.lchild.N
+        if t > k:
+            return self._select(sub_tree.lchild, k)
+        elif t < k:
+            return self._select(sub_tree.rchild, k-t-1)
+        else:
+            return sub_tree
         
+    def rank(self, key):
+        if self.root is None: return None
+        return self._rank(self.root, key)
+    
+    def _rank(self, sub_tree, key):
+        if sub_tree is None: return 0
+        if sub_tree.key == key:
+            return self.size(sub_tree.lchild)
+        elif sub_tree.key > key:
+            return self._rank(sub_tree.lchild, key)
+        else:
+            return 1 + self.size(sub_tree.lchild) + self._rank(sub_tree.rchild, key)
         
+    def deleteMin(self):
+        if self.root is None:
+            return
+        self._deleteMin(self.root)
+    
+    def _deleteMin(self, sub_tree):
+        if sub_tree.lchild is None:
+            return sub_tree.rchild
         
+        sub_tree.lchild = self._deleteMin(sub_tree.lchild)
+        sub_tree.N = self.size(sub_tree.lchild) + self.size(sub_tree.rchild) + 1
+        return sub_tree
+    
+    def deleteMax(self):
+        if self.root is None: return 
+        self._deleteMax(self.root)
+        
+    def _deleteMax(self, sub_tree):
+        if sub_tree.rchild is None:
+            return sub_tree.lchild
+        sub_tree.rchild = self._deleteMax(sub_tree.rchild)
+        sub_tree.N = self.size(sub_tree.lchild) + self.size(sub_tree.rchild) + 1
+        return sub_tree
+    
+    def delete(self, key):
+        if key not in self:
+            raise KeyError("{} is not in this BST object".format(key))
+        
+        self._delete(self.root, key)
+
+    def _delete(self, sub_tree, key):
+        if sub_tree is None: return
+        if key < sub_tree.key: sub_tree.lchild = self._delete(sub_tree.lchild, key)
+        elif key > sub_tree.key: sub_tree.rchild = self._delete(sub_tree.rchild, key)
+        else:
+            if sub_tree.rchild is None:
+                return sub_tree.lchild
+            if sub_tree.lchild is None:
+                return sub_tree.rchild
+            t = sub_tree
+            sub_tree = self._min(t.rchild)
+            sub_tree.rchild = self._deleteMin(t.rchild)
+            sub_tree.lchild = t.lchild
+        sub_tree.N = self.size(sub_tree.lchild) + self.size(sub_tree.rchild) + 1
+        return sub_tree
+    
+    def getkeys(self, lokey=None, hikey=None):
+        lokey = lokey if lokey is not None else 0
+        hikey = hikey if hikey is not None else self.size()-1
+        if lokey < 0: raise KeyError('lokey: {} must bigger than 0'.format(lokey))
+        if hikey > self.size(): raise KeyError('hikey:{0} must smaller than {1}'.format(hikey, self.size()))
+        if lokey >= hikey: raise KeyError('lokey:{0} must smaller than hikey:{1}'.fromat(lokey, hikey))
+        if self.size() == 0: return
+        lokey = self.select(lokey)
+        hikey = self.select(hikey)
+        result = []
+        self._getkeys(self.root, result, lokey, hikey)
+        return result
+    
+    def _getkeys(self, sub_tree, result, lokey, hikey):
+        if sub_tree is None: return
+        if lokey < sub_tree.key:
+            self._getkeys(sub_tree.lchild, result, lokey, hikey)
+            
+        if  lokey <= sub_tree.key <= hikey:
+            result.append(sub_tree.key)
+        
+        if hikey > sub_tree.key:
+            self._getkeys(sub_tree.rchild, result, lokey, hikey)
+            
+        
+
 if __name__ == '__main__':
     bst = BST()
     bst.put('g',1)
@@ -184,25 +325,6 @@ if __name__ == '__main__':
     bst.put('e',4)
     bst.put('y',4)
     bst.put('j',9)
-    #print(bst.root)
-    print(bst.get('y'))
-    print(bst.get('r'))
-    print('y' in bst)
-    print(bst._bstSearch(bst.root, 'y').key)
-    print(len(bst))
-
-    '''
-    print('----------------------------------')
-    bst1 = BST()
-    bst1.put('g',1,False)
-    bst1.put('d',3,False)
-    bst1.put('z',2,False)
-    bst1.put('e',4,False)
-    bst1.put('y',4,False)
-    bst1.put('j',9,False)
-    print(bst.get('y',False))
-    print(bst.get('r',False))
-    #print(bst1.root)
-    '''
-    
-        
+    bst.put('a',45)    
+    print(bst.root)
+    print(bst.delete('k'))

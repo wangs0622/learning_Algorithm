@@ -12,7 +12,6 @@ from LinkedList import Node
 class ST(Link):
     
     def __init__(self):
-        self.comparetimes = 0
         Link.__init__(self)
     
     def put(self, key, value):
@@ -32,7 +31,7 @@ class ST(Link):
     def delete(self, key):
         pass
     
-    def contains(self, key):
+    def __contains__(self, key):
         node = self._find(key)
         if node:
             return True
@@ -46,7 +45,6 @@ class ST(Link):
         while True:
             if temp is None:
                 break
-            self.comparetimes += 1
             if temp.data[0] == key:
                 return temp
             temp = temp.next
@@ -131,7 +129,7 @@ class OrderedST():
         else:
             raise KeyError('key:"{}" is not found'.format(key))
     
-    def contians(self, key):
+    def __contians__(self, key):
         if key in self.keys:
             return True
         else: 
